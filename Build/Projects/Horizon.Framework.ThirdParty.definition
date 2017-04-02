@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ExternalProject Name="Horizon.Framework.ThirdParty">
+
+  <Platform Type="Windows">
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+  </Platform>
+
+  <Platform Type="Linux">
+    <Binary Name="atk-sharp" Path="Libraries\atk-sharp.dll" LocalCopy="False" />
+    <Binary Name="gdk-sharp" Path="Libraries\gdk-sharp.dll" LocalCopy="False" />
+    <Binary Name="gio-sharp" Path="Libraries\gio-sharp.dll" LocalCopy="False" />
+    <Binary Name="glib-sharp" Path="Libraries\glib-sharp.dll" LocalCopy="False" />
+    <Binary Name="gtk-sharp" Path="Libraries\gtk-sharp.dll" LocalCopy="False" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+  </Platform>
+
+  <Platform Type="MacOS">
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+  </Platform>
+
+</ExternalProject>

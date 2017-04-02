@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<IncludeProject Name="Horizon.Framework.Include" Path="Horizon.Framework.Include">
+  <Files>
+    <Compile Include="AppDelegate.cs">
+      <Platforms>MacOS</Platforms>
+    </Compile>
+    <Compile Include="LinuxProgram.cs" />
+    <Compile Include="MacOSProgram.cs" />
+    <Compile Include="MainWindow.cs">
+      <Platforms>MacOS</Platforms>
+    </Compile>
+    <Compile Include="MainWindow.designer.cs">
+      <Platforms>MacOS</Platforms>
+      <DependentUpon>MainWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindowController.cs">
+      <Platforms>MacOS</Platforms>
+    </Compile>
+    <Content Include="Protobuild.Icon.icns" />
+    <Compile Include="WindowsProgram.cs" />
+    <InterfaceDefinition Include="MainMenu.xib">
+      <Platforms>MacOS</Platforms>
+    </InterfaceDefinition>
+    <InterfaceDefinition Include="MainWindow.xib">
+      <Platforms>MacOS</Platforms>
+    </InterfaceDefinition>
+    <None Include="Info.plist">
+      <Platforms>MacOS</Platforms>
+    </None>
+  </Files>
+</IncludeProject>

@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Name="Horizon.Framework.Library" Path="Horizon.Framework.Library" Type="Library" Platforms="Windows,MacOS,Linux">
+  <Properties>
+    <Property Name="LangVersion" Value="5" />
+  </Properties>
+  <References>
+    <Reference Include="Horizon.Framework.ThirdParty" />
+  </References>
+  <Files>
+    <Compile Include="AppHandlers\AppHandlerManager.cs" />
+    <Compile Include="AppHandlers\IAppHandler.cs" />
+    <Compile Include="AppHandlers\IAppHandlerManager.cs" />
+    <Compile Include="BrandingEngine\IBrandingEngine.cs" />
+    <Compile Include="BrowserEmulation\BrowserEmulation.cs" />
+    <Compile Include="ConfigManager\ConfigManager.cs" />
+    <Compile Include="ConfigManager\IConfigManager.cs" />
+    <Compile Include="ConfigurationAttribute.cs" />
+    <Compile Include="DI\LightweightKernel.cs" />
+    <Compile Include="DI\LightweightKernelInjectionPreferredAttribute.cs" />
+    <Compile Include="DI\LightweightKernelModule.cs" />
+    <Compile Include="ErrorLog\ErrorLog.cs" />
+    <Compile Include="ErrorLog\IErrorLog.cs" />
+    <Compile Include="Execution\IExecution.cs" />
+    <Compile Include="Execution\LinuxExecution.cs" />
+    <Compile Include="Execution\MacOSExecution.cs" />
+    <Compile Include="Execution\WindowsExecution.cs" />
+    <Compile Include="Gtk3WebKit.cs" />
+    <Compile Include="IConfiguration.cs" />
+    <Compile Include="ILoadable.cs" />
+    <Compile Include="ProcessExtensions.cs" />
+    <Compile Include="ProgressRetryDownloader.cs" />
+    <Compile Include="RuntimeServer\RuntimeServer.cs" />
+    <Compile Include="Startup\IStartup.cs" />
+    <Compile Include="Startup\Startup.cs" />
+    <Compile Include="UIManager\IUIManager.cs" />
+    <Compile Include="UIManager\LinuxUIManager.cs" />
+    <Compile Include="UIManager\MacOSUIManager.cs" />
+    <Compile Include="UIManager\WindowsUIManager.cs" />
+    <Compile Include="Workflows\IWorkflow.cs" />
+    <Compile Include="Workflows\IWorkflowManager.cs" />
+    <Compile Include="Workflows\WorkflowManager.cs" />
+  </Files>
+</Project>

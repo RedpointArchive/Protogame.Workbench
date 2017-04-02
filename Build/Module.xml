@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Module>
+  <Name>Protogame.Workbench</Name>
+  <Authors>Redpoint Games</Authors>
+  <Description>The cross-platform GUI that helps create and open Protogame projects.</Description>
+  <LicenseUrl>https://opensource.org/licenses/MIT</LicenseUrl>
+  <ProjectUrl>https://protogame.org/</ProjectUrl>
+  <IconUrl>https://protogame.org/favicon.png</IconUrl>
+  <GitRepositoryUrl>https://github.com/RedpointGames/Protogame.Workbench</GitRepositoryUrl>
+  <DefaultAction>resync</DefaultAction>
+  <GenerateNuGetRepositories>true</GenerateNuGetRepositories>
+</Module>
