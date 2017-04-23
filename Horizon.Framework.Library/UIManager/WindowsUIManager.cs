@@ -1,23 +1,20 @@
-﻿using System.IO;
+﻿#if PLATFORM_WINDOWS
+using System;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
+using System.Web;
+using System.Windows.Forms;
 
-#if PLATFORM_WINDOWS
 namespace Horizon.Framework
 {
-    using System;
-    using System.Diagnostics;
-    using System.Drawing;
-    using System.Reflection;
-    using System.Runtime.InteropServices;
-    using System.Web;
-    using System.Windows.Forms;
-
     public class WindowsUIManager : IUIManager
     {
-        private Form m_ActiveForm;
+        private Form _activeForm;
         
-        private readonly RuntimeServer m_RuntimeServer;
+        private readonly RuntimeServer _runtimeServer;
+        private readonly IConfiguration _configuration;
 
-        private readonly IAppHandlerManager m_AppHandlerManager;
+        private readonly IAppHandlerManager _appHandlerManager;
 
         private readonly IBrandingEngine _brandingEngine;
 
@@ -25,10 +22,15 @@ namespace Horizon.Framework
 
         public static object SubmissionLock = new object();
 
-        public WindowsUIManager(RuntimeServer server, IAppHandlerManager appHandlerManager, IBrandingEngine brandingEngine)
+        public WindowsUIManager(
+            RuntimeServer server,
+            IConfiguration configuration,
+            IAppHandlerManager appHandlerManager,
+            IBrandingEngine brandingEngine)
         {
-            this.m_RuntimeServer = server;
-            this.m_AppHandlerManager = appHandlerManager;
+            _runtimeServer = server;
+            _configuration = configuration;
+            _appHandlerManager = appHandlerManager;
             _brandingEngine = brandingEngine;
         }
 
@@ -39,14 +41,20 @@ namespace Horizon.Framework
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+            var displaySize = Screen.PrimaryScreen.Bounds;
+
+            int width, height;
+            bool allowResizing;
+            _configuration.GetWindowConfiguration(displaySize.Width, displaySize.Height, out width, out height, out allowResizing);
+
             var form = new Form();
-            this.m_ActiveForm = form;
+            _activeForm = form;
             form.Text = _brandingEngine.ProductName;
             form.Icon = _brandingEngine.WindowsIcon;
-            form.Width = 736;
-            form.Height = 439;
-            form.FormBorderStyle = FormBorderStyle.FixedDialog;
-            form.MaximizeBox = false;
+            form.Width = width;
+            form.Height = height;
+            form.FormBorderStyle = allowResizing ? FormBorderStyle.Sizable : FormBorderStyle.FixedDialog;
+            form.MaximizeBox = allowResizing;
             form.StartPosition = FormStartPosition.CenterScreen;
 
             var webBrowser = new WebBrowser();
@@ -54,15 +62,15 @@ namespace Horizon.Framework
             webBrowser.ObjectForScripting = new ScriptInterface();
             form.Controls.Add(webBrowser);
 
-            this.m_RuntimeServer.RegisterRuntimeInjector(x =>
-                this.SafeInvoke(form, () => ExecuteScript(webBrowser, x)));
+            _runtimeServer.RegisterRuntimeInjector(x =>
+                SafeInvoke(form, () => ExecuteScript(webBrowser, x)));
 
             if (!Debugger.IsAttached)
             {
                 webBrowser.ScriptErrorsSuppressed = true;
             }
 
-            webBrowser.Navigate(this.m_RuntimeServer.BaseUri);
+            webBrowser.Navigate(_runtimeServer.BaseUri);
 
             webBrowser.Navigating += (o, a) => ExecuteAndCatch(
                 () =>
@@ -74,14 +82,14 @@ namespace Horizon.Framework
                         return;
                     }
 
-                    this.m_AppHandlerManager.Handle(uri.AbsolutePath, HttpUtility.ParseQueryString(uri.Query));
+                    _appHandlerManager.Handle(uri.AbsolutePath, HttpUtility.ParseQueryString(uri.Query));
 
                     a.Cancel = true;
                 });
 
             webBrowser.Navigated += (sender, args) => ExecuteAndCatch(() =>
             {
-                this.m_RuntimeServer.Flush();
+                _runtimeServer.Flush();
             });
 
             form.Show();
@@ -96,7 +104,7 @@ namespace Horizon.Framework
             Application.Run();
         }
 
-        [System.Runtime.InteropServices.ComVisible(true)]
+        [ComVisible(true)]
         public class ScriptInterface
         {
             public void ReportError(string errorMessage, string url, int lineNumber)
@@ -139,9 +147,9 @@ namespace Horizon.Framework
                         IsSubmitting = true;
                     }
 
-                    if (this.m_ActiveForm != null)
+                    if (_activeForm != null)
                     {
-                        this.m_ActiveForm.Close();
+                        _activeForm.Close();
                     }
 
                     Application.DoEvents();

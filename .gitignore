@@ -11,3 +11,4 @@ Protobuild.Manager/Protobuild.Manager.Windows.csproj.user
 Installers/Windows/ProtobuildWebInstall.exe
 Windows.tar.lzma
 /Linux.tar.lzma
+*.csproj.user

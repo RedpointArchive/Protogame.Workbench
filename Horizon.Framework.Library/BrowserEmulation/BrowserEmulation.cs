@@ -48,8 +48,8 @@ namespace Horizon.Framework
                 src = src.CreateSubKey(key);
             }
 
-            src.SetValue(new FileInfo(Assembly.GetExecutingAssembly().Location).Name, version);
-            src.SetValue(new FileInfo(Assembly.GetExecutingAssembly().Location).Name.Replace(".exe", ".vshost.exe"), version);
+            src.SetValue(new FileInfo(Assembly.GetEntryAssembly().Location).Name, version);
+            src.SetValue(new FileInfo(Assembly.GetEntryAssembly().Location).Name.Replace(".exe", ".vshost.exe"), version);
         }
     }
 }

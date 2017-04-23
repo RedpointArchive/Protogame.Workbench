@@ -43,12 +43,6 @@ namespace Protogame
             */
         }
 
-        public void GetWindowSize(out int width, out int height)
-        {
-            width = 800;
-            height = 600;
-        }
-
         public bool HandleSilentStartup(LightweightKernel kernel, string[] arguments)
         {
             return false;
@@ -57,6 +51,13 @@ namespace Protogame
         public async Task PerformBackgroundWorkAtStartup(LightweightKernel kernel)
         {
             
+        }
+
+        public void GetWindowConfiguration(int displayWidth, int displayHeight, out int width, out int height, out bool allowResizing)
+        {
+            width = displayWidth / 2;
+            height = displayHeight - 200;
+            allowResizing = true;
         }
     }
 }

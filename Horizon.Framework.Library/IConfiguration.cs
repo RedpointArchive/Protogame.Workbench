@@ -15,6 +15,6 @@ namespace Horizon.Framework
 
         void ConfigureAppHandlers(LightweightKernel kernel, Dictionary<string, IAppHandler> appHandlers);
 
-        void GetWindowSize(out int width, out int height);
+        void GetWindowConfiguration(int displayWidth, int displayHeight, out int width, out int height, out bool allowResizing);
     }
 }

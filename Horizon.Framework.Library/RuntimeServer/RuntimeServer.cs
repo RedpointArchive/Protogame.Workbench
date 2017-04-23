@@ -250,30 +250,27 @@ namespace Horizon.Framework
                 var context = await listener.GetContextAsync();
                 var request = context.Request;
                 var response = context.Response;
-
-                var embeddedUri = request.Url.AbsolutePath.Replace('/', '.');
-                if (embeddedUri.EndsWith("."))
+                
+                var realPath = Path.Combine("Content/" + request.Url.AbsolutePath);
+                if (request.Url.AbsolutePath.EndsWith("/"))
                 {
-                    embeddedUri += "index.htm";
+                    realPath = Path.Combine(realPath, "index.htm");
                 }
 
-                var names = assembly.GetManifestResourceNames();
-
-                var resource = assembly.GetManifestResourceStream(embeddedUri.Substring(1));
-                if (resource == null)
+                if (!File.Exists(realPath))
                 {
                     response.StatusCode = 404;
-                    Console.Error.WriteLine("Request for resource failed (not found): " + embeddedUri);
+                    Console.Error.WriteLine("Request for resource failed (not found): " + realPath);
                 }
                 else
                 {
-                    var split = embeddedUri.Split('.');
+                    var split = realPath.Split('.');
                     var extension = split[split.Length - 1];
 
                     switch (extension)
                     {
-                        case "htm":
-                            response.ContentType = "text/html";
+                        case "xhtm":
+                            response.ContentType = "application/xhtml+xml";
                             break;
                         case "js":
                             response.ContentType = "text/javascript";
@@ -289,12 +286,12 @@ namespace Horizon.Framework
                             break;
                     }
 
-                    if (extension == "htm")
+                    if (extension == "xhtm")
                     {
                         try
                         {
                             var xml = new XmlDocument();
-                            xml.Load(resource);
+                            xml.Load(realPath);
 
                             xml.DocumentElement.SelectSingleNode("//style[@data-injection='true']").InnerText = @"
 *[data-template] {
@@ -342,8 +339,11 @@ namespace Horizon.Framework
                     }
                     else
                     {
-                        response.ContentLength64 = resource.Length;
-                        resource.CopyTo(response.OutputStream);
+                        using (var resource = new FileStream(realPath, FileMode.Open))
+                        {
+                            response.ContentLength64 = resource.Length;
+                            resource.CopyTo(response.OutputStream);
+                        }
                     }
                 }
 
