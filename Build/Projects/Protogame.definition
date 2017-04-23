@@ -9,10 +9,19 @@
     <Reference Include="Horizon.Framework.ThirdParty" />
   </References>
   <Files>
+    <Compile Include="AppHandlers\LearnAppHandler.cs" />
+    <Compile Include="AppHandlers\OpenDocsAppHandler.cs" />
+    <Compile Include="AppHandlers\OpenGitHubAppHandler.cs" />
+    <Compile Include="AppHandlers\OpenGitterAppHandler.cs" />
+    <Compile Include="AppHandlers\OpenTwitterAppHandler.cs" />
+    <Compile Include="AppHandlers\SupportAppHandler.cs" />
+    <Compile Include="AppHandlers\WelcomeAppHandler.cs" />
     <Compile Include="WorkbenchBrandingEngine.cs" />
     <Compile Include="WorkbenchConfiguration.cs" />
-    <Compile Include="Workflows\InitialWorkflow.cs" />
     <Compile Include="Workflows\IWorkflowFactory.cs" />
+    <Compile Include="Workflows\LearnWorkflow.cs" />
+    <Compile Include="Workflows\SupportWorkflow.cs" />
+    <Compile Include="Workflows\WelcomeWorkflow.cs" />
     <Compile Include="Workflows\WorkflowFactory.cs" />
     <EmbeddedResource Include="..\Images\Protobuild.Icon.ico">
       <Link>Protobuild.Icon.ico</Link>
@@ -72,96 +81,80 @@
       <LogicalName>Branding.xml</LogicalName>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="OfflineResources\create.htm">
-      <LogicalName>create.htm</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OfflineResources\css\bootstrap.css">
-      <LogicalName>css.bootstrap.css</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OfflineResources\css\bootstrap-theme.css">
-      <LogicalName>css.bootstrap-theme.css</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OfflineResources\css\branding.css">
-      <LogicalName>css.branding.css</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OfflineResources\css\font-awesome.min.css">
-      <LogicalName>css.font-awesome.min.css</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OfflineResources\css\main.css">
-      <LogicalName>css.main.css</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OfflineResources\css\prereq.css">
-      <LogicalName>css.prereq.css</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OfflineResources\fonts\FontAwesome.otf">
-      <LogicalName>fonts.FontAwesome.otf</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OfflineResources\fonts\fontawesome-webfont.eot">
-      <LogicalName>fonts.fontawesome-webfont.eot</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OfflineResources\fonts\fontawesome-webfont.svg">
-      <LogicalName>fonts.fontawesome-webfont.svg</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OfflineResources\fonts\fontawesome-webfont.ttf">
-      <LogicalName>fonts.fontawesome-webfont.ttf</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OfflineResources\fonts\fontawesome-webfont.woff">
-      <LogicalName>fonts.fontawesome-webfont.woff</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OfflineResources\fonts\SourceSansPro-Bold.ttf">
-      <LogicalName>fonts.SourceSansPro-Bold.ttf</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OfflineResources\fonts\SourceSansPro-Italic.ttf">
-      <LogicalName>fonts.SourceSansPro-Italic.ttf</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OfflineResources\fonts\SourceSansPro-Regular.ttf">
-      <LogicalName>fonts.SourceSansPro-Regular.ttf</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OfflineResources\index.htm">
-      <LogicalName>index.htm</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OfflineResources\js\bootstrap.js">
-      <LogicalName>js.bootstrap.js</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OfflineResources\js\create.js">
-      <LogicalName>js.create.js</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OfflineResources\js\errorhandle.js">
-      <LogicalName>js.errorhandle.js</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OfflineResources\js\index.js">
-      <LogicalName>js.index.js</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OfflineResources\js\jquery-1.11.1.min.js">
-      <LogicalName>js.jquery-1.11.1.min.js</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OfflineResources\js\main.js">
-      <LogicalName>js.main.js</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OfflineResources\js\nameproject.js">
-      <LogicalName>js.nameproject.js</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OfflineResources\js\project.js">
-      <LogicalName>js.project.js</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OfflineResources\js\selecttemplate.js">
-      <LogicalName>js.selecttemplate.js</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OfflineResources\js\template.js">
-      <LogicalName>js.template.js</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OfflineResources\nameproject.htm">
-      <LogicalName>nameproject.htm</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OfflineResources\project.htm">
-      <LogicalName>project.htm</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OfflineResources\selecttemplate.htm">
-      <LogicalName>selecttemplate.htm</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OfflineResources\tpl.head.htm">
-      <LogicalName>tpl.head.htm</LogicalName>
-    </EmbeddedResource>
-    <None Include="OfflineResources\css.bootstrap.css" />
+    <None Include="Content\css\bootstrap.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\css\bootstrap.css.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\css\bootstrap.min.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\css\bootstrap.min.css.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\css\bootstrap-theme.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\css\bootstrap-theme.css.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\css\bootstrap-theme.min.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\css\bootstrap-theme.min.css.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\css\simple-sidebar.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\css\styles.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\css\theme.min.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\css\variables.less">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\fonts\glyphicons-halflings-regular.eot">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\fonts\glyphicons-halflings-regular.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\fonts\glyphicons-halflings-regular.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\fonts\glyphicons-halflings-regular.woff">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\fonts\glyphicons-halflings-regular.woff2">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\img\asteroids.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\img\platformer.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\index.xhtm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\js\app.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\js\bootstrap.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\js\bootstrap.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\js\jquery.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\js\npm.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </Files>
 </Project>
