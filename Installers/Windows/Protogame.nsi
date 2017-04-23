@@ -50,9 +50,9 @@ Section "All Components" CoreComponents ;No components page, name is not importa
   
 SectionEnd
 
-Function StartProtobuildManager
+Function StartProtogameWorkbench
 
   SetOutPath '$INSTDIR'
-  ExecShell "open" "$STARTMENU\Protobuild Manager.url"
+  ExecShell "open" "$STARTMENU\Protogame Workbench.url"
 
 FunctionEnd
