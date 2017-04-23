@@ -1,11 +1,15 @@
 ﻿using System;
 using Horizon.Framework;
 
-namespace Protogame
+namespace Protogame.Workflows
 {
     public interface IWorkflowFactory
     {
-        IWorkflow CreateInitialWorkflow();
+        IWorkflow CreateWelcomeWorkflow();
+
+        IWorkflow CreateLearnWorkflow();
+
+        IWorkflow CreateSupportWorkflow();
     }
 }
 

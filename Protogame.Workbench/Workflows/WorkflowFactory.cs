@@ -1,23 +1,29 @@
-﻿using System;
-using Horizon.Framework;
-using Protogame;
+﻿using Horizon.Framework;
 
-namespace Protogame
+namespace Protogame.Workflows
 {
     public class WorkflowFactory : IWorkflowFactory
     {
-        private readonly LightweightKernel m_Kernel;
+        private readonly LightweightKernel _kernel;
 
         public WorkflowFactory(LightweightKernel kernel)
         {
-            this.m_Kernel = kernel;
+            _kernel = kernel;
         }
-       
-        public IWorkflow CreateInitialWorkflow()
+
+        public IWorkflow CreateLearnWorkflow()
         {
-            return new InitialWorkflow(
-                this.m_Kernel.Get<RuntimeServer>(),
-                this.m_Kernel.Get<IBrandingEngine>());
+            return new LearnWorkflow(_kernel.Get<RuntimeServer>());
+        }
+
+        public IWorkflow CreateSupportWorkflow()
+        {
+            return new SupportWorkflow(_kernel.Get<RuntimeServer>());
+        }
+
+        public IWorkflow CreateWelcomeWorkflow()
+        {
+            return new WelcomeWorkflow(_kernel.Get<RuntimeServer>());
         }
     }
 }

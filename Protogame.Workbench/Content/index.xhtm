@@ -13,6 +13,7 @@
     <link href="css/simple-sidebar.css" rel="stylesheet" />
     <link href="css/theme.min.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
+    <style type="text/css" data-injection="true"></style>
 </head>
 <body>
     <div id="wrapper">
@@ -22,14 +23,14 @@
                 <li class="sidebar-brand">
                         Protogame
                 </li>
-                <li class="active">
-                    <a href="#">Welcome</a>
+                <li class="active app-nav" id="nav-welcome">
+                    <a href="app:///welcome">Welcome</a>
                 </li>
-                <li>
-                    <a href="#">Learn</a>
+                <li class="app-nav" id="nav-learn">
+                    <a href="app:///learn">Learn</a>
                 </li>
-                <li>
-                    <a href="#">Support</a>
+                <li class="app-nav" id="nav-support">
+                    <a href="app:///support">Support</a>
                 </li>
             </ul>
         </div>
@@ -38,7 +39,7 @@
             </div>
             <div id="page-content-inset">
                 <div class="container-fluid">
-                    <div class="row">
+                    <div class="row app-page" id="page-welcome">
                         <div class="col-lg-12">
                             <h4>Open Project</h4>
                             <div class="project-section">
@@ -64,11 +65,57 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row app-page" id="page-learn">
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <h4>Documentation</h4>
+                                <p>
+                                    Protogame has extensive documentation available on our website.  To launch the documentation
+                                    in your browser, use the button below:
+                                </p>
+                                <a href="app:///open-docs" class="btn btn-success">Launch Documentation</a>
+                            </div>
+                            <div class="row" style="margin-top: 2em;">
+                                <h4>Examples</h4>
+                                <p>
+                                    If you're looking for code examples or references, the templates available for new projects
+                                    are a great place to start.  Check out the available templates under the Welcome tab.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row app-page" id="page-support">
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <h4>Gitter</h4>
+                                <p>
+                                    Our Gitter channel is the fastest way to get support.  The developers of Protogame are often there,
+                                    and are available to support you.  Keep in mind the developers reside in Australia (+10 GMT).
+                                </p>
+                                <a href="app:///open-gitter" class="btn btn-success">Open Gitter Channel</a>
+                            </div>
+                            <div class="row" style="margin-top: 2em;">
+                                <h4>Twitter</h4>
+                                <p>
+                                    If you need to reach out over Twitter, send a message to <a href="app:///open-twitter">@hachque</a>.
+                                </p>
+                            </div>
+                            <div class="row" style="margin-top: 2em;">
+                                <h4>Reporting Bugs &amp; Requesting Features</h4>
+                                <p>
+                                    If you want to report bugs, or request features, we suggest filing an issue on GitHub.
+                                </p>
+                                <a href="app:///open-github" class="btn btn-success">Open GitHub</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
         <script src="js/jquery.js"></script>
         <script src="js/bootstrap.min.js"></script>
+        <script src="js/app.js"></script>
+        <script data-injection="true"></script>
     </div>
 </body>
 </html>

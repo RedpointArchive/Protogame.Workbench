@@ -2,6 +2,8 @@
 using System.Threading.Tasks;
 using Horizon.Framework;
 using Protogame;
+using Protogame.AppHandlers;
+using Protogame.Workflows;
 
 [assembly: Configuration(typeof(WorkbenchConfiguration))]
 
@@ -17,30 +19,18 @@ namespace Protogame
 
         public IWorkflow GetInitialWorkflow(LightweightKernel kernel)
         {
-            return kernel.Get<InitialWorkflow>();
+            return kernel.Get<WelcomeWorkflow>();
         }
 
         public void ConfigureAppHandlers(LightweightKernel kernel, Dictionary<string, IAppHandler> appHandlers)
         {
-            /*
-
-            _appHandlers.Add("/open-other", _kernel.Get<OpenOtherAppHandler>());
-            _appHandlers.Add("/open-recent", _kernel.Get<OpenRecentAppHandler>());
-            _appHandlers.Add("/create-new", _kernel.Get<CreateNewAppHandler>());
-            _appHandlers.Add("/switch-platform", _kernel.Get<SwitchPlatformAppHandler>());
-            _appHandlers.Add("/close", _kernel.Get<CloseProjectAppHandler>());
-            _appHandlers.Add("/select-template", _kernel.Get<SelectTemplateAppHandler>());
-            _appHandlers.Add("/cancel-creation", _kernel.Get<CancelCreationAppHandler>());
-            _appHandlers.Add("/finalize-project", _kernel.Get<FinalizeProjectAppHandler>());
-            _appHandlers.Add("/sync-projects", _kernel.Get<SyncProjectsAppHandler>());
-            _appHandlers.Add("/resync-projects", _kernel.Get<ResyncProjectsAppHandler>());
-            _appHandlers.Add("/generate-projects", _kernel.Get<GenerateProjectsAppHandler>());
-            _appHandlers.Add("/create-package", _kernel.Get<CreatePackageAppHandler>());
-            _appHandlers.Add("/automated-build", _kernel.Get<AutomatedBuildAppHandler>());
-            _appHandlers.Add("/set-console-state", _kernel.Get<SetConsoleStateAppHandler>());
-            _appHandlers.Add("/select-project-dir", _kernel.Get<SelectProjectDirAppHandler>());
-
-            */
+            appHandlers.Add("/welcome", kernel.Get<WelcomeAppHandler>());
+            appHandlers.Add("/support", kernel.Get<SupportAppHandler>());
+            appHandlers.Add("/learn", kernel.Get<LearnAppHandler>());
+            appHandlers.Add("/open-docs", kernel.Get<OpenDocsAppHandler>());
+            appHandlers.Add("/open-gitter", kernel.Get<OpenGitterAppHandler>());
+            appHandlers.Add("/open-github", kernel.Get<OpenGitHubAppHandler>());
+            appHandlers.Add("/open-twitter", kernel.Get<OpenTwitterAppHandler>());
         }
 
         public bool HandleSilentStartup(LightweightKernel kernel, string[] arguments)
@@ -56,7 +46,7 @@ namespace Protogame
         public void GetWindowConfiguration(int displayWidth, int displayHeight, out int width, out int height, out bool allowResizing)
         {
             width = displayWidth / 2;
-            height = displayHeight - 200;
+            height = (int)(displayHeight * 0.8f);
             allowResizing = true;
         }
     }

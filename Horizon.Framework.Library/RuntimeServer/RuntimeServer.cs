@@ -254,7 +254,7 @@ namespace Horizon.Framework
                 var realPath = Path.Combine("Content/" + request.Url.AbsolutePath);
                 if (request.Url.AbsolutePath.EndsWith("/"))
                 {
-                    realPath = Path.Combine(realPath, "index.htm");
+                    realPath = Path.Combine(realPath, "index.xhtm");
                 }
 
                 if (!File.Exists(realPath))
@@ -293,15 +293,22 @@ namespace Horizon.Framework
                             var xml = new XmlDocument();
                             xml.Load(realPath);
 
-                            xml.DocumentElement.SelectSingleNode("//style[@data-injection='true']").InnerText = @"
+                            var nsmanager = new XmlNamespaceManager(xml.NameTable);
+                            nsmanager.AddNamespace("x", "http://www.w3.org/1999/xhtml");
+                            
+                            var styleInjection = xml.SelectSingleNode("//x:style[@data-injection='true']", nsmanager);
+                            if (styleInjection != null)
+                            {
+                                styleInjection.InnerText = @"
 *[data-template] {
   display: none;
 }
 ";
+                            }
 
                             foreach (
                                 var elem in
-                                    xml.DocumentElement.SelectNodes("//meta[@name='needs-loadable']")
+                                    xml.DocumentElement.SelectNodes("//x:meta[@name='needs-loadable']", nsmanager)
                                         .OfType<XmlElement>())
                             {
                                 var @interface = elem.GetAttribute("interface");
@@ -316,10 +323,12 @@ namespace Horizon.Framework
                                 }
                             }
 
-                            ((XmlElement) xml.DocumentElement.SelectSingleNode("//script[@data-injection='true']"))
-                                .InnerText = this.GetInjectionScript(true);
-                            ((XmlElement) xml.DocumentElement.SelectSingleNode("//script[@data-injection='true']"))
-                                .SetAttribute("data-injection", "false");
+                            var scriptInjection = (XmlElement)xml.SelectSingleNode("//x:script[@data-injection='true']", nsmanager);
+                            if (scriptInjection != null)
+                            {
+                                scriptInjection.InnerText = this.GetInjectionScript(true);
+                                scriptInjection.SetAttribute("data-injection", "false");
+                            }
 
                             using (var stream = new MemoryStream())
                             {
@@ -334,6 +343,11 @@ namespace Horizon.Framework
                         catch (Exception ex)
                         {
                             response.StatusCode = 500;
+                            response.ContentType = "text/plain";
+                            using (var writer = new StreamWriter(response.OutputStream))
+                            {
+                                writer.WriteLine(ex.ToString());
+                            }
                             Console.Error.WriteLine(ex);
                         }
                     }
