@@ -156,5 +156,8 @@
     <None Include="Content\js\npm.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Info.plist">
+      <Platforms>MacOS</Platforms>
+    </None>
   </Files>
 </Project>

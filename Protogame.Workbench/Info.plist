@@ -5,7 +5,7 @@
 	<key>CFBundleDisplayName</key>
 	<string>Protobuild Manager</string>
 	<key>CFBundleIdentifier</key>
-	<string>au.com.redpointgames.ProtobuildManager</string>
+	<string>au.com.redpointgames.ProtogameWorkbench</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>LSMinimumSystemVersion</key>
@@ -17,7 +17,7 @@
 	<key>CFBundleIconFile</key>
 	<string>Protobuild.Icon</string>
 	<key>CFBundleName</key>
-	<string>Protobuild.Manager.MacOS</string>
+	<string>Protogame.Workbench.MacOS</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>

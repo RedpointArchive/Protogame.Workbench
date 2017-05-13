@@ -24,8 +24,5 @@
     <InterfaceDefinition Include="MainWindow.xib">
       <Platforms>MacOS</Platforms>
     </InterfaceDefinition>
-    <None Include="Info.plist">
-      <Platforms>MacOS</Platforms>
-    </None>
   </Files>
 </IncludeProject>
